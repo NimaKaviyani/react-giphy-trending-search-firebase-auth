@@ -1,6 +1,56 @@
-//@import "~react-loader-spinner";
-//@import "~react-toastify";
-
-h1 {
-    background-color: red;
+/* Bootstrap Variables */
+$primary: #6D48E5;
+$border-radius: 1px;
+/* Bootstrap */
+@import "node_modules/bootstrap/scss/bootstrap";
+/* React Toastify */
+@import "node_modules/react-toastify/scss/main";
+/* Global Styles */
+body {
+    font: {
+        family: "Poppins", sans-serif;
+    }
+}
+.loading {
+    display: none;
+}
+/* Auth Styles */
+.public-layout {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.auth-form {
+    border: 1px solid #CECECE;
+    box-shadow: 0 10px 5px -5px rgba(0, 0, 0, 0.4);
+    padding: 30px 20px;
+}
+.gif-list {
+    img {
+        height: 150px;
+        max-width: 100%;
+    }
+}
+.inline-loading {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 99;
+    text-align: center;
+    background: #CCCCCC7A;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.no-result {
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

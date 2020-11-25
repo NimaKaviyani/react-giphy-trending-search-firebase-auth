@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import "./assets/app.scss";
 
 ReactDOM.render(
     <React.StrictMode>
-        {/*<App />*/}
-        <h1>ok</h1>
+        <App />
     </React.StrictMode>,
     document.getElementById("root"),
 );
