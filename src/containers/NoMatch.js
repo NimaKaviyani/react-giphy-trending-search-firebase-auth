@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Col, Container, Row} from 'react-bootstrap';
+import {Col} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import PublicLayout from '../layout/PublicLayout';
 
