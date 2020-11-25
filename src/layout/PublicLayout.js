@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import {Col, Container, Row} from "react-bootstrap";
+import React, {Component} from 'react';
+import {Col, Container, Row} from 'react-bootstrap';
 
 class PublicLayout extends Component {
     render() {
@@ -9,12 +9,12 @@ class PublicLayout extends Component {
             <section className="public-layout">
                 <Container>
                     <Row className="justify-content-center">
-                        <Col
+                        {title && <Col
                             xs={12}
                             className="mb-5"
                         >
-                            <h1 className="text-center text-primary">{title ? title : ""}</h1>
-                        </Col>
+                            <h1 className="text-center text-primary">{title}</h1>
+                        </Col>}
                         {children}
                     </Row>
                 </Container>
