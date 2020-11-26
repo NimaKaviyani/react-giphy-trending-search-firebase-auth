@@ -1,9 +1,15 @@
-import React, {Component} from "react";
-import {Button, Col, Form} from "react-bootstrap";
-import {Link} from "react-router-dom";
-import PublicLayout from "../layout/PublicLayout";
+import React, {Component} from 'react';
+import {Button, Col, FormGroup, FormLabel, FormText} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
+import {SignUpSchema} from '../constants/validationSchemas';
+import PublicLayout from '../layout/PublicLayout';
+import {Formik, Form, Field} from 'formik';
 
 class Register extends Component {
+    handleSubmit = (values) => {
+        console.log(values);
+    };
+
     render() {
         return (
             <PublicLayout title="Register">
@@ -12,32 +18,75 @@ class Register extends Component {
                     lg={6}
                     md={7}
                 >
-                    <Form className="auth-form">
-                        <Form.Group controlId="email">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control
-                                type="email"
-                                placeholder="Enter email"
-                            />
-                            <Form.Text className="text-muted">
-                                We'll never share your email with anyone else.
-                            </Form.Text>
-                        </Form.Group>
-                        <Form.Group controlId="password">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control
-                                type="password"
-                                placeholder="Password"
-                            />
-                        </Form.Group>
-                        <Button
-                            variant="primary"
-                            type="submit"
-                            block
-                        >
-                            Submit
-                        </Button>
-                    </Form>
+                    <Formik
+                        initialValues={{
+                            email: '',
+                            password: '',
+                            repeat: '',
+                        }}
+                        validationSchema={SignUpSchema}
+                        onSubmit={this.handleSubmit}
+                    >
+                        {({
+                              errors,
+                              touched,
+                          }) => (
+                            <Form className="auth-form">
+                                <FormGroup controlId="email">
+                                    <FormLabel>Email address</FormLabel>
+                                    <Field
+                                        className="form-control"
+                                        name="email"
+                                        type="email"
+                                        placeholder="Enter email"
+                                    />
+                                    <FormText className="text-muted">
+                                        We'll never share your email with anyone else.
+                                    </FormText>
+                                    {errors.email && touched.email ? (
+                                        <div className="invalid-feedback d-block">
+                                            {errors.email}
+                                        </div>
+                                    ) : null}
+                                </FormGroup>
+                                <FormGroup controlId="password">
+                                    <FormLabel>Password</FormLabel>
+                                    <Field
+                                        className="form-control"
+                                        name="password"
+                                        type="password"
+                                        placeholder="Password"
+                                    />
+                                    {errors.password && touched.password ? (
+                                        <div className="invalid-feedback d-block">
+                                            {errors.password}
+                                        </div>
+                                    ) : null}
+                                </FormGroup>
+                                <FormGroup controlId="repeat">
+                                    <FormLabel>Password</FormLabel>
+                                    <Field
+                                        className="form-control"
+                                        name="repeat"
+                                        type="password"
+                                        placeholder="Repeat Password"
+                                    />
+                                    {errors.repeat && touched.repeat ? (
+                                        <div className="invalid-feedback d-block">
+                                            {errors.repeat}
+                                        </div>
+                                    ) : null}
+                                </FormGroup>
+                                <Button
+                                    variant="primary"
+                                    type="submit"
+                                    block
+                                >
+                                    Register
+                                </Button>
+                            </Form>
+                        )}
+                    </Formik>
                     <div className="text-center mt-3">
                         <Link to="/">Already have account?</Link>
                     </div>
