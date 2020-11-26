@@ -1,10 +1,27 @@
-import React, {Component} from "react";
-import {Button, Col, Form} from "react-bootstrap";
-import {Link} from "react-router-dom";
-import PublicLayout from "../layout/PublicLayout";
+import React, {Component} from 'react';
+import {Button, Col, FormGroup, FormLabel} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
+import PublicLayout from '../layout/PublicLayout';
+import {Formik, Form, Field} from 'formik';
+import * as Yup from 'yup';
 
 class Login extends Component {
+    handleSubmit = (values) => {
+        console.log(values);
+    };
+
     render() {
+        const SignInSchema = Yup.object().shape({
+            password:
+                Yup.string()
+                   .min(7, 'Too Short!')
+                   .max(50, 'Too Long!')
+                   .required('Please enter your password'),
+            email:
+                Yup.string()
+                   .email('Invalid email')
+                   .required('Please enter your email address'),
+        });
         return (
             <PublicLayout title="Login">
                 <Col
@@ -12,32 +29,57 @@ class Login extends Component {
                     lg={6}
                     md={7}
                 >
-                    <Form className="auth-form">
-                        <Form.Group controlId="email">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control
-                                type="email"
-                                placeholder="Enter email"
-                            />
-                            {/*<Form.Text className="text-muted">
-                                We'll never share your email with anyone else.
-                            </Form.Text>*/}
-                        </Form.Group>
-                        <Form.Group controlId="password">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control
-                                type="password"
-                                placeholder="Password"
-                            />
-                        </Form.Group>
-                        <Button
-                            variant="primary"
-                            type="submit"
-                            block
-                        >
-                            Submit
-                        </Button>
-                    </Form>
+                    <Formik
+                        initialValues={{
+                            email: '',
+                            password: '',
+                        }}
+                        validationSchema={SignInSchema}
+                        onSubmit={this.handleSubmit}
+                    >
+                        {({
+                              errors,
+                              touched,
+                          }) => (
+                            <Form className="auth-form">
+                                <FormGroup controlId="email">
+                                    <FormLabel>Email address</FormLabel>
+                                    <Field
+                                        className="form-control"
+                                        name="email"
+                                        type="email"
+                                        placeholder="Enter email"
+                                    />
+                                    {errors.email && touched.email ? (
+                                        <div className="invalid-feedback d-block">
+                                            {errors.email}
+                                        </div>
+                                    ) : null}
+                                </FormGroup>
+                                <FormGroup controlId="password">
+                                    <FormLabel>Password</FormLabel>
+                                    <Field
+                                        className="form-control"
+                                        name="password"
+                                        type="password"
+                                        placeholder="Password"
+                                    />
+                                    {errors.password && touched.password ? (
+                                        <div className="invalid-feedback d-block">
+                                            {errors.password}
+                                        </div>
+                                    ) : null}
+                                </FormGroup>
+                                <Button
+                                    variant="primary"
+                                    type="submit"
+                                    block
+                                >
+                                    Submit
+                                </Button>
+                            </Form>
+                        )}
+                    </Formik>
                     <div className="text-center mt-3">
                         No account? <Link to="/register">Create one!</Link>
                     </div>
