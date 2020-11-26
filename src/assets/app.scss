@@ -164,3 +164,16 @@ body {
 .pointer {
     cursor: pointer;
 }
+/* User List */
+.user {
+    img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+}
+.user-list {
+    .card {
+        box-shadow: 0 10px 5px -5px rgba(0, 0, 0, 0.4);
+    }
+}
