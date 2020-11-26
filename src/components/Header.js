@@ -1,5 +1,7 @@
-import React, {Component} from "react";
-import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
+import React, {Component} from 'react';
+import {Container, Dropdown, Nav, Navbar, NavItem, NavLink} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
+import avatar from '../assets/img/avatar.png';
 
 class Header extends Component {
     render() {
@@ -15,24 +17,43 @@ class Header extends Component {
                     <Navbar.Brand href="#home">Giphy React App</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="ml-auto">
-                            <Nav.Link href="#deets">More deets</Nav.Link>
-                            <Nav.Link
-                                eventKey={2}
-                                href="#memes"
-                            >
-                                Dank memes
-                            </Nav.Link>
-                            <NavDropdown
-                                title="Dropdown"
-                                id="collasible-nav-dropdown"
-                            >
-                                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                            </NavDropdown>
+                        <Nav className="mr-auto">
+                            <Link
+                                className="nav-link"
+                                to='/search'
+                            >Search Gif</Link>
+                            <Link
+                                className="nav-link"
+                                to='/user-list'
+                            >Users List</Link>
+                        </Nav>
+                        <Nav>
+                            <Dropdown as={NavItem}>
+                                <Dropdown.Toggle as={NavLink}>
+                                    <div className="avatar-wrapper">
+                                        <img
+                                            src={avatar}
+                                            alt="User Avatar"
+                                        />
+                                        Unknown
+                                    </div>
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    <Link
+                                        className="dropdown-item"
+                                        to="/profile"
+                                    >Profile</Link>
+                                    <Link
+                                        className="dropdown-item"
+                                        to="/to-do-list"
+                                    >To Do List</Link>
+                                    <Dropdown.Divider />
+                                    <Link
+                                        className="dropdown-item"
+                                        to="#"
+                                    >Sign Out</Link>
+                                </Dropdown.Menu>
+                            </Dropdown>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
