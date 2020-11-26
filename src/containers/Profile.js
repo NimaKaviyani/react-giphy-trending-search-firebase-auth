@@ -2,10 +2,12 @@ import {Field, Form, Formik} from 'formik';
 import React, {Component} from 'react';
 import {Button, Col, FormGroup, FormLabel, Modal, Row} from 'react-bootstrap';
 import {FiEdit} from 'react-icons/fi';
+import {connect} from 'react-redux';
 import {ProfileSchema} from '../constants/validationSchemas';
 import AuthLayout from '../layout/AuthLayout';
 import cover from '../assets/img/cover.jpg';
 import avatar from '../assets/img/avatar.png';
+import {userChanged} from '../redux/actions';
 
 class Profile extends Component {
     state = {
@@ -39,6 +41,7 @@ class Profile extends Component {
             user,
         }, () => {
             this.handleShow();
+            this.props.userChanged({name: values.name, avatarImg: values.avatarImg});
         });
     };
 
@@ -118,13 +121,13 @@ class Profile extends Component {
                     </Modal.Header>
                     <Formik
                         initialValues={{
-                            name: '',
-                            age: '',
-                            email: '',
-                            skype: '',
-                            about: '',
-                            avatarImg: '',
-                            coverImg: '',
+                            name: user.name,
+                            age: user.age,
+                            email: user.email,
+                            skype: user.skype,
+                            about: user.about,
+                            avatarImg: user.avatarImg,
+                            coverImg: user.coverImg,
                         }}
                         validationSchema={ProfileSchema}
                         onSubmit={this.handleSubmit}
@@ -132,6 +135,9 @@ class Profile extends Component {
                         {({
                               errors,
                               touched,
+                              handleChange,
+                              handleBlur,
+                              values,
                           }) => (
                             <Form>
                                 <Modal.Body>
@@ -147,6 +153,9 @@ class Profile extends Component {
                                                 name="name"
                                                 type="text"
                                                 placeholder="Your Name"
+                                                value={values.name}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
                                             />
                                             {errors.name && touched.name ? (
                                                 <div className="invalid-feedback d-block">
@@ -165,6 +174,9 @@ class Profile extends Component {
                                                 name="age"
                                                 type="text"
                                                 placeholder="Your Age"
+                                                value={values.age}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
                                             />
                                             {errors.age && touched.age ? (
                                                 <div className="invalid-feedback d-block">
@@ -183,6 +195,9 @@ class Profile extends Component {
                                                 name="email"
                                                 type="email"
                                                 placeholder="Your Email"
+                                                value={values.email}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
                                             />
                                             {errors.email && touched.email ? (
                                                 <div className="invalid-feedback d-block">
@@ -201,6 +216,9 @@ class Profile extends Component {
                                                 name="skype"
                                                 type="skype"
                                                 placeholder="Your Skype"
+                                                value={values.skype}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
                                             />
                                             {errors.skype && touched.skype ? (
                                                 <div className="invalid-feedback d-block">
@@ -219,6 +237,9 @@ class Profile extends Component {
                                                 name="coverImg"
                                                 type="text"
                                                 placeholder="Your Cover Image"
+                                                value={values.coverImg}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
                                             />
                                             {errors.coverImg && touched.coverImg ? (
                                                 <div className="invalid-feedback d-block">
@@ -237,6 +258,9 @@ class Profile extends Component {
                                                 name="avatarImg"
                                                 type="text"
                                                 placeholder="Your Avatar Image"
+                                                value={values.avatarImg}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
                                             />
                                             {errors.avatarImg && touched.avatarImg ? (
                                                 <div className="invalid-feedback d-block">
@@ -257,6 +281,9 @@ class Profile extends Component {
                                                 placeholder="About You"
                                                 component="textarea"
                                                 rows="3"
+                                                value={values.about}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
                                             />
                                             {errors.about && touched.about ? (
                                                 <div className="invalid-feedback d-block">
@@ -285,4 +312,9 @@ class Profile extends Component {
     }
 }
 
-export default Profile;
+export default connect(
+    null,
+    {
+        userChanged,
+    },
+)(Profile);

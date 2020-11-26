@@ -16,7 +16,7 @@ import Search from "./containers/Search";
 
 class App extends Component {
     render() {
-        let loading = "has-loading";
+        let loading = "has-user";
         document.body.classList.add(loading);
         return (
             <Provider store={configureStore()}>

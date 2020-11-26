@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Container, Dropdown, Nav, Navbar, NavItem, NavLink} from 'react-bootstrap';
+import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import avatar from '../assets/img/avatar.png';
 import {Cookies} from 'react-cookie';
@@ -15,6 +16,7 @@ class Header extends Component {
     };
 
     render() {
+        const {user} = this.props;
         return (
             <Navbar
                 collapseOnSelect
@@ -42,10 +44,10 @@ class Header extends Component {
                                 <Dropdown.Toggle as={NavLink}>
                                     <div className="avatar-wrapper">
                                         <img
-                                            src={avatar}
+                                            src={user.user.avatarImg ? user.user.avatarImg !== '' ? user.user.avatarImg : avatar : avatar}
                                             alt="User Avatar"
                                         />
-                                        Unknown
+                                        {user.user.name ? user.user.name !== '' ? user.user.name : 'Unknown' : 'Unknown'}
                                     </div>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
@@ -75,4 +77,10 @@ class Header extends Component {
     }
 }
 
-export default Header;
+const mapStateToProps = ({user}) => {
+    return {user};
+};
+export default connect(
+    mapStateToProps,
+    null,
+)(Header);

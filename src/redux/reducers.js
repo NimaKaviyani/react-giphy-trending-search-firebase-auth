@@ -1,10 +1,8 @@
-import { combineReducers } from 'redux';
-// import settings from './settings/reducer';
-// import handleLoading from './loading/reducer';
+import {combineReducers} from 'redux';
+import user from './user/reducer';
 
 const reducers = combineReducers({
-  // settings,
-  // handleLoading,
+    user,
 });
 
 export default reducers;
