@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {Button, Col, FormGroup, FormLabel} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
+import {SignInSchema} from '../constants/validationSchemas';
 import PublicLayout from '../layout/PublicLayout';
 import {Formik, Form, Field} from 'formik';
-import * as Yup from 'yup';
 
 class Login extends Component {
     handleSubmit = (values) => {
@@ -11,17 +11,7 @@ class Login extends Component {
     };
 
     render() {
-        const SignInSchema = Yup.object().shape({
-            password:
-                Yup.string()
-                   .min(7, 'Too Short!')
-                   .max(50, 'Too Long!')
-                   .required('Please enter your password'),
-            email:
-                Yup.string()
-                   .email('Invalid email')
-                   .required('Please enter your email address'),
-        });
+
         return (
             <PublicLayout title="Login">
                 <Col
@@ -75,7 +65,7 @@ class Login extends Component {
                                     type="submit"
                                     block
                                 >
-                                    Submit
+                                    Login
                                 </Button>
                             </Form>
                         )}
