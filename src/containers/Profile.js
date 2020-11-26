@@ -1,7 +1,9 @@
+import {Field, Form, Formik} from 'formik';
 import React, {Component} from 'react';
-import {Button, Col, Modal, Row} from 'react-bootstrap';
+import {Button, Col, FormGroup, FormLabel, Modal, Row} from 'react-bootstrap';
 import {IconContext} from 'react-icons';
 import {FiEdit} from 'react-icons/fi';
+import {ProfileSchema} from '../constants/validationSchemas';
 import AuthLayout from '../layout/AuthLayout';
 import cover from '../assets/img/cover.jpg';
 import avatar from '../assets/img/avatar.png';
@@ -13,6 +15,10 @@ class Profile extends Component {
         this.setState(prevState => ({
             show: !prevState.show,
         }));
+    };
+
+    handleSubmit = (values) => {
+        console.log(values);
     };
 
     render() {
@@ -89,7 +95,6 @@ class Profile extends Component {
                     aria-labelledby="contained-modal-title-center"
                     centered
                     show={show}
-                    scrollable
                     onHide={this.handleShow}
                 >
                     <Modal.Header closeButton>
@@ -97,17 +102,170 @@ class Profile extends Component {
                             Edit Profile Detail
                         </Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>
-                        <h4>Profile Image</h4>
-                        <p>
-                            Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-                            dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-                            consectetur ac, vestibulum at eros.
-                        </p>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button onClick={this.handleShow}>Close</Button>
-                    </Modal.Footer>
+                    <Formik
+                        initialValues={{
+                            name: '',
+                            age: '',
+                            email: '',
+                            skype: '',
+                            about: '',
+                            avatarImg: '',
+                            coverImg: '',
+                        }}
+                        validationSchema={ProfileSchema}
+                        onSubmit={this.handleSubmit}
+                    >
+                        {({
+                              errors,
+                              touched,
+                          }) => (
+                            <Form>
+                                <Modal.Body>
+                                    <div className="form-row">
+                                        <FormGroup
+                                            controlId="name"
+                                            as={Col}
+                                            md={6}
+                                        >
+                                            <FormLabel>Your Name</FormLabel>
+                                            <Field
+                                                className="form-control"
+                                                name="name"
+                                                type="text"
+                                                placeholder="Your Name"
+                                            />
+                                            {errors.name && touched.name ? (
+                                                <div className="invalid-feedback d-block">
+                                                    {errors.name}
+                                                </div>
+                                            ) : null}
+                                        </FormGroup>
+                                        <FormGroup
+                                            controlId="age"
+                                            as={Col}
+                                            md={6}
+                                        >
+                                            <FormLabel>Your Age</FormLabel>
+                                            <Field
+                                                className="form-control"
+                                                name="age"
+                                                type="text"
+                                                placeholder="Your Age"
+                                            />
+                                            {errors.age && touched.age ? (
+                                                <div className="invalid-feedback d-block">
+                                                    {errors.age}
+                                                </div>
+                                            ) : null}
+                                        </FormGroup>
+                                        <FormGroup
+                                            controlId="email"
+                                            as={Col}
+                                            md={6}
+                                        >
+                                            <FormLabel>Your Email</FormLabel>
+                                            <Field
+                                                className="form-control"
+                                                name="email"
+                                                type="email"
+                                                placeholder="Your Email"
+                                            />
+                                            {errors.email && touched.email ? (
+                                                <div className="invalid-feedback d-block">
+                                                    {errors.email}
+                                                </div>
+                                            ) : null}
+                                        </FormGroup>
+                                        <FormGroup
+                                            controlId="skype"
+                                            as={Col}
+                                            md={6}
+                                        >
+                                            <FormLabel>Your Skype</FormLabel>
+                                            <Field
+                                                className="form-control"
+                                                name="skype"
+                                                type="skype"
+                                                placeholder="Your Skype"
+                                            />
+                                            {errors.skype && touched.skype ? (
+                                                <div className="invalid-feedback d-block">
+                                                    {errors.skype}
+                                                </div>
+                                            ) : null}
+                                        </FormGroup>
+                                        <FormGroup
+                                            controlId="coverImg"
+                                            as={Col}
+                                            md={12}
+                                        >
+                                            <FormLabel>Your Cover Image</FormLabel>
+                                            <Field
+                                                className="form-control"
+                                                name="coverImg"
+                                                type="text"
+                                                placeholder="Your Cover Image"
+                                            />
+                                            {errors.coverImg && touched.coverImg ? (
+                                                <div className="invalid-feedback d-block">
+                                                    {errors.coverImg}
+                                                </div>
+                                            ) : null}
+                                        </FormGroup>
+                                        <FormGroup
+                                            controlId="avatarImg"
+                                            as={Col}
+                                            md={12}
+                                        >
+                                            <FormLabel>Your Avatar Image</FormLabel>
+                                            <Field
+                                                className="form-control"
+                                                name="avatarImg"
+                                                type="text"
+                                                placeholder="Your Avatar Image"
+                                            />
+                                            {errors.avatarImg && touched.avatarImg ? (
+                                                <div className="invalid-feedback d-block">
+                                                    {errors.avatarImg}
+                                                </div>
+                                            ) : null}
+                                        </FormGroup>
+                                        <FormGroup
+                                            controlId="about"
+                                            as={Col}
+                                            md={12}
+                                        >
+                                            <FormLabel>About You</FormLabel>
+                                            <Field
+                                                className="form-control"
+                                                name="about"
+                                                type="about"
+                                                placeholder="About You"
+                                                component="textarea"
+                                                rows="3"
+                                            />
+                                            {errors.about && touched.about ? (
+                                                <div className="invalid-feedback d-block">
+                                                    {errors.about}
+                                                </div>
+                                            ) : null}
+                                        </FormGroup>
+                                    </div>
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <Button
+                                        type="button"
+                                        variant="info"
+                                        onClick={this.handleShow}
+                                    >Close</Button>
+                                    <Button
+                                        type="submit"
+                                        onClick={this.handleShow}
+                                    >Save</Button>
+                                </Modal.Footer>
+                            </Form>
+                        )}
+                    </Formik>
                 </Modal>
             </AuthLayout>
         );
