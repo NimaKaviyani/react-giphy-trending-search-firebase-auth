@@ -7,6 +7,7 @@ import Loader from "react-loader-spinner";
 import Login from "./containers/Login";
 import Profile from './containers/Profile';
 import ToDo from './containers/ToDo';
+import UsersList from './containers/UsersList';
 import {configureStore} from "./redux/store";
 import NoMatch from "./containers/NoMatch";
 import Register from "./containers/Register";
@@ -57,11 +58,16 @@ class App extends Component {
                             <Route
                                 path={"/to-do-list"}
                                 component={ToDo}
-                                key={5}
+                                key={6}
+                            />
+                            <Route
+                                path={"/user-list"}
+                                component={UsersList}
+                                key={7}
                             />
                             <Route
                                 component={NoMatch}
-                                key={4}
+                                key={8}
                             />
                         </Switch>
                     </Router>
