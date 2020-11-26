@@ -26,6 +26,7 @@ body {
     box-shadow: 0 10px 5px -5px rgba(0, 0, 0, 0.4);
     padding: 30px 20px;
 }
+/* Search Styles */
 .gif-list {
     img {
         height: 150px;
@@ -53,4 +54,110 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+/* Header Styles */
+.dropdown-toggle {
+    &.nav-link {
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+    }
+
+    &::after {
+        margin-left: 0;
+        margin-right: 0.255em;
+    }
+}
+.avatar-wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+
+    img {
+        width: 50px;
+        border-radius: 50%;
+        margin-left: .5rem;
+    }
+}
+@media (min-width: 992px) {
+    .navbar-expand-lg .navbar-nav {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+/* Profile Styles */
+.edit-profile {
+    background: $light;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 3px 6px -3px $dark;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    z-index: -1;
+    transition: $transition-base;
+}
+.profile-cover {
+    margin-top: -3rem;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+
+    .edit-profile {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+    }
+
+    &:hover {
+        .edit-profile {
+            opacity: 1;
+            visibility: visible;
+            z-index: 1;
+        }
+    }
+
+    .profile-avatar {
+        position: absolute;
+        bottom: 0;
+        transform: translateY(50%);
+        z-index: 1;
+        display: flex;
+        align-items: flex-end;
+
+        img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+        }
+
+        h3 {
+            margin-bottom: 2rem;
+        }
+    }
+}
+.detail-list {
+    list-style: none;
+    padding: 0;
+}
+.detail-wrapper {
+    h4 {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &:hover {
+        .edit-profile {
+            opacity: 1;
+            visibility: visible;
+            z-index: 1;
+        }
+    }
 }
