@@ -5,6 +5,8 @@ import {CookiesProvider} from "react-cookie";
 import {Provider} from "react-redux";
 import Loader from "react-loader-spinner";
 import Login from "./containers/Login";
+import Profile from './containers/Profile';
+import ToDo from './containers/ToDo';
 import {configureStore} from "./redux/store";
 import NoMatch from "./containers/NoMatch";
 import Register from "./containers/Register";
@@ -41,6 +43,21 @@ class App extends Component {
                                 path={"/search"}
                                 component={Search}
                                 key={3}
+                            />
+                            <Route
+                                path={"/profile"}
+                                component={Profile}
+                                key={4}
+                            />
+                            <Route
+                                path={"/to-do-list"}
+                                component={ToDo}
+                                key={5}
+                            />
+                            <Route
+                                path={"/to-do-list"}
+                                component={ToDo}
+                                key={5}
                             />
                             <Route
                                 component={NoMatch}
