@@ -96,6 +96,7 @@ class Profile extends Component {
                     centered
                     show={show}
                     onHide={this.handleShow}
+                    animation={false}
                 >
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title-center">
