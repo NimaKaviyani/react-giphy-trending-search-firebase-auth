@@ -2,7 +2,9 @@
   <dictionary name="Laptop">
     <words>
       <w>axios</w>
+      <w>formik</w>
       <w>giphy</w>
+      <w>navbar</w>
       <w>toastify</w>
     </words>
   </dictionary>
