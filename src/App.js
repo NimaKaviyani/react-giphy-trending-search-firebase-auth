@@ -56,18 +56,13 @@ class App extends Component {
                                 key={5}
                             />
                             <Route
-                                path={"/to-do-list"}
-                                component={ToDo}
+                                path={"/user-list"}
+                                component={UsersList}
                                 key={6}
                             />
                             <Route
-                                path={"/user-list"}
-                                component={UsersList}
-                                key={7}
-                            />
-                            <Route
                                 component={NoMatch}
-                                key={8}
+                                key={7}
                             />
                         </Switch>
                     </Router>
