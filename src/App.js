@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import {CookiesProvider} from "react-cookie";
 import {Provider} from "react-redux";
 import Loader from "react-loader-spinner";
+import {ToastContainer} from 'react-toastify';
 import Login from "./containers/Login";
 import Profile from './containers/Profile';
 import ToDo from './containers/ToDo';
@@ -27,6 +28,7 @@ class App extends Component {
                         height={100}
                         width={100}
                     />
+                    <ToastContainer/>
                     <Router>
                         <Switch>
                             <Route

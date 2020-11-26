@@ -47,8 +47,7 @@ export const ProfileSchema = Yup.object().shape({
            .positive('Age must be greater than zero'),
     email:
         Yup.string()
-           .email('Invalid email')
-           .required('Please enter your email address'),
+           .email('Invalid email'),
     skype:
         Yup.string()
            .min(3, 'Too Short!')

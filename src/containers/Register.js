@@ -1,16 +1,39 @@
 import React, {Component} from 'react';
 import {Button, Col, FormGroup, FormLabel, FormText} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {SignUpSchema} from '../constants/validationSchemas';
 import PublicLayout from '../layout/PublicLayout';
 import {Formik, Form, Field} from 'formik';
+import {auth} from '../utils/firebase';
+import {popupAlert} from '../utils/utils';
 
 class Register extends Component {
-    handleSubmit = (values) => {
+    state = {success: false};
+    handleSubmit = async (values) => {
         console.log(values);
+        await auth.createUserWithEmailAndPassword(values.email, values.password)
+                  .then(authUser => {
+                      console.log(authUser);
+                      if (authUser.operationType === 'signIn') {
+                          popupAlert(423, 'Success!', 'success');
+                          setTimeout(() => {
+                              this.setState({
+                                  success: true,
+                              });
+                          }, 1000);
+                      }
+                  })
+                  .catch(error => {
+                      console.log(error);
+                      popupAlert(423, error.message, 'danger');
+                  });
     };
 
     render() {
+        const {success} = this.state;
+        if (success) {
+            return <Redirect to="/" />;
+        }
         return (
             <PublicLayout title="Register">
                 <Col
