@@ -1,7 +1,6 @@
 import {Field, Form, Formik} from 'formik';
 import React, {Component} from 'react';
 import {Button, Col, FormGroup, FormLabel, Modal, Row} from 'react-bootstrap';
-import {IconContext} from 'react-icons';
 import {FiEdit} from 'react-icons/fi';
 import {ProfileSchema} from '../constants/validationSchemas';
 import AuthLayout from '../layout/AuthLayout';
@@ -9,7 +8,19 @@ import cover from '../assets/img/cover.jpg';
 import avatar from '../assets/img/avatar.png';
 
 class Profile extends Component {
-    state = {show: false};
+    state = {
+        user: {
+            id: undefined,
+            name: undefined,
+            age: undefined,
+            email: undefined,
+            skype: undefined,
+            about: undefined,
+            coverImg: cover,
+            avatarImg: undefined,
+        },
+        show: false,
+    };
 
     handleShow = () => {
         this.setState(prevState => ({
@@ -18,33 +29,41 @@ class Profile extends Component {
     };
 
     handleSubmit = (values) => {
-        console.log(values);
+        const {...user} = this.state.user;
+        for (const [key, value] of Object.entries(values)) {
+            if (value !== '') {
+                user[key] = value;
+            }
+        }
+        this.setState({
+            user,
+        }, () => {
+            this.handleShow();
+        });
     };
 
     render() {
-        const {show} = this.state;
+        const {show, user} = this.state;
         return (
             <AuthLayout>
                 <div
                     className="profile-cover"
                     style={{
-                        backgroundImage: 'url(' + cover + ')',
+                        backgroundImage: `url(${user.coverImg ? user.coverImg : cover})`,
                     }}
                 >
                     <div
                         className="edit-profile"
                         onClick={this.handleShow}
                     >
-                        <IconContext.Provider value={{className: ''}}>
-                            <FiEdit />
-                        </IconContext.Provider>
+                        <FiEdit />
                     </div>
                     <div className="profile-avatar">
                         <img
-                            src={avatar}
+                            src={user.avatarImg ? user.avatarImg : avatar}
                             alt="Avatar"
                         />
-                        <h3>Unknown</h3>
+                        <h3>{user.name ? user.name : 'Unknown'}</h3>
                     </div>
                 </div>
                 <Row className="mt-5 detail-wrapper">
@@ -58,16 +77,14 @@ class Profile extends Component {
                                 className="edit-profile"
                                 onClick={this.handleShow}
                             >
-                                <IconContext.Provider value={{className: ''}}>
-                                    <FiEdit />
-                                </IconContext.Provider>
+                                <FiEdit />
                             </div>
                         </h4>
                         <ul className="detail-list">
-                            <li><b>Name:</b> Unknown</li>
-                            <li><b>Age:</b> ---</li>
-                            <li><b>Email:</b> ---</li>
-                            <li><b>Skype:</b> ---</li>
+                            <li><b>Name:</b> {user.name ? user.name : 'Unknown'}</li>
+                            <li><b>Age:</b> {user.age ? user.age : '---'}</li>
+                            <li><b>Email:</b> {user.email ? user.email : '---'}</li>
+                            <li><b>Skype:</b> {user.skype ? user.skype : '---'}</li>
                         </ul>
                     </Col>
                     <Col
@@ -80,14 +97,10 @@ class Profile extends Component {
                                 className="edit-profile"
                                 onClick={this.handleShow}
                             >
-                                <IconContext.Provider value={{className: ''}}>
-                                    <FiEdit />
-                                </IconContext.Provider>
+                                <FiEdit />
                             </div>
                         </h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci alias aliquid corporis,
-                            cupiditate dolore, eaque labore optio praesentium quibusdam ullam voluptas voluptatum. Aut
-                            consequatur et ipsam nisi sit vel.</p>
+                        <p>{user.about ? user.about : 'No Information...'}</p>
                     </Col>
                 </Row>
                 <Modal
@@ -261,7 +274,6 @@ class Profile extends Component {
                                     >Close</Button>
                                     <Button
                                         type="submit"
-                                        onClick={this.handleShow}
                                     >Save</Button>
                                 </Modal.Footer>
                             </Form>
