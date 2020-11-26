@@ -10,23 +10,22 @@ import {popupAlert} from '../utils/utils';
 class Register extends Component {
     state = {success: false};
     handleSubmit = async (values) => {
-        console.log(values);
-        await auth.createUserWithEmailAndPassword(values.email, values.password)
-                  .then(authUser => {
-                      console.log(authUser);
-                      if (authUser.operationType === 'signIn') {
-                          popupAlert(423, 'Success!', 'success');
-                          setTimeout(() => {
-                              this.setState({
-                                  success: true,
-                              });
-                          }, 1000);
-                      }
-                  })
-                  .catch(error => {
-                      console.log(error);
-                      popupAlert(423, error.message, 'danger');
-                  });
+        await
+            auth.createUserWithEmailAndPassword(values.email, values.password)
+                .then(authUser => {
+                    if (authUser.operationType === 'signIn') {
+                        popupAlert(423, 'Success!', 'success');
+                        setTimeout(() => {
+                            this.setState({
+                                success: true,
+                            });
+                        }, 1000);
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                    popupAlert(423, error.message, 'danger');
+                });
     };
 
     render() {

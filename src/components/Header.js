@@ -2,8 +2,18 @@ import React, {Component} from 'react';
 import {Container, Dropdown, Nav, Navbar, NavItem, NavLink} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import avatar from '../assets/img/avatar.png';
+import {Cookies} from 'react-cookie';
+
+const cookies = new Cookies();
 
 class Header extends Component {
+    handleSignOut = () => {
+        cookies.remove('uid');
+        setTimeout(() => {
+            window.location.href = '/';
+        }, 15);
+    };
+
     render() {
         return (
             <Navbar
@@ -51,6 +61,9 @@ class Header extends Component {
                                     <Link
                                         className="dropdown-item"
                                         to="#"
+                                        onClick={() => {
+                                            this.handleSignOut();
+                                        }}
                                     >Sign Out</Link>
                                 </Dropdown.Menu>
                             </Dropdown>

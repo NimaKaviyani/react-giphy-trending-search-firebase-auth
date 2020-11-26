@@ -1,17 +1,40 @@
 import React, {Component} from 'react';
 import {Button, Col, FormGroup, FormLabel} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {SignInSchema} from '../constants/validationSchemas';
 import PublicLayout from '../layout/PublicLayout';
 import {Formik, Form, Field} from 'formik';
+import {auth} from '../utils/firebase';
+import {popupAlert} from '../utils/utils';
+import {Cookies} from 'react-cookie';
+
+const cookies = new Cookies();
 
 class Login extends Component {
-    handleSubmit = (values) => {
-        console.log(values);
+    state = {success: false};
+    handleSubmit = async (values) => {
+        await
+            auth.signInWithEmailAndPassword(values.email, values.password)
+                .then(authUser => {
+                    cookies.set('uid', authUser.user.uid);
+                    popupAlert(200, 'Login Success!', 'success');
+                    setTimeout(() => {
+                        this.setState({
+                            success: true,
+                        });
+                    }, 500);
+                })
+                .catch(error => {
+                    console.log(error);
+                    popupAlert(423, error.message, 'danger');
+                });
     };
 
     render() {
-
+        const {success} = this.state;
+        if (success) {
+            return <Redirect to="/search" />;
+        }
         return (
             <PublicLayout title="Login">
                 <Col
