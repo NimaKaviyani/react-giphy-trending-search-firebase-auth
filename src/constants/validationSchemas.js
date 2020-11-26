@@ -27,3 +27,11 @@ export const SignUpSchema = Yup.object().shape({
            .email('Invalid email')
            .required('Please enter your email address'),
 });
+
+export const TodoSchema = Yup.object().shape({
+    todo:
+        Yup.string()
+           .min(3, 'Too Short!')
+           .max(50, 'Too Long!')
+           .required('Please enter your todo!'),
+});
