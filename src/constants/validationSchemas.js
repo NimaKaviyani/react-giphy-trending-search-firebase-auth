@@ -35,3 +35,36 @@ export const TodoSchema = Yup.object().shape({
            .max(50, 'Too Long!')
            .required('Please enter your todo!'),
 });
+
+export const ProfileSchema = Yup.object().shape({
+    name:
+        Yup.string()
+           .min(3, 'Too Short!')
+           .max(50, 'Too Long!'),
+    age:
+        Yup.number()
+           .typeError('Age must be a number')
+           .positive('Age must be greater than zero'),
+    email:
+        Yup.string()
+           .email('Invalid email')
+           .required('Please enter your email address'),
+    skype:
+        Yup.string()
+           .min(3, 'Too Short!')
+           .max(50, 'Too Long!'),
+    about:
+        Yup.string()
+           .min(3, 'Too Short!')
+           .max(200, 'Too Long!'),
+    coverImg:
+        Yup.string().matches(
+            /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+            'Enter correct url!',
+        ),
+    avatarImg:
+        Yup.string().matches(
+            /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+            'Enter correct url!',
+        ),
+});
