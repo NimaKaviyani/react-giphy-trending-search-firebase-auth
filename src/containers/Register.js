@@ -39,7 +39,7 @@ class Register extends Component {
                         </Button>
                     </Form>
                     <div className="text-center mt-3">
-                        <Link to={"/"}>Already have account?</Link>
+                        <Link to="/">Already have account?</Link>
                     </div>
                 </Col>
             </PublicLayout>

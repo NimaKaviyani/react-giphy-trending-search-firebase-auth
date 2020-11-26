@@ -39,7 +39,7 @@ class Login extends Component {
                         </Button>
                     </Form>
                     <div className="text-center mt-3">
-                        No account? <Link to={"/register"}>Create one!</Link>
+                        No account? <Link to="/register">Create one!</Link>
                     </div>
                 </Col>
             </PublicLayout>

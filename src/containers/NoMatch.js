@@ -13,7 +13,7 @@ class NoMatch extends Component {
                 >
                     <h1>404</h1>
                     <p>Ooops... Error 404 We are sorry, but the page you are looking for does not exist.</p>
-                    <Link to={'/'}>Back to homepage</Link>
+                    <Link to='/'>Back to homepage</Link>
                 </Col>
             </PublicLayout>
         );
