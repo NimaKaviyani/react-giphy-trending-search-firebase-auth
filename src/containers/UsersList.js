@@ -10,7 +10,6 @@ class UsersList extends Component {
             {
                 id: 1,
                 name: 'Nima Kaviyani',
-                avatar: avatar,
                 isFollowed: false,
                 age: 31,
                 email: 'nima.kaviyani@gmail.com',
@@ -22,7 +21,6 @@ class UsersList extends Component {
             {
                 id: 2,
                 name: 'Kaviyani',
-                avatar: avatar,
                 isFollowed: false,
                 age: 30,
                 email: 'kaviyani@gmail.com',
@@ -34,7 +32,6 @@ class UsersList extends Component {
             {
                 id: 3,
                 name: 'Nima',
-                avatar: avatar,
                 isFollowed: true,
                 age: 29,
                 email: 'nima@kaviyani.com',
@@ -46,7 +43,6 @@ class UsersList extends Component {
             {
                 id: 4,
                 name: 'User Family',
-                avatar: avatar,
                 isFollowed: false,
                 age: 28,
                 email: 'email@exmaple.com',
@@ -58,7 +54,6 @@ class UsersList extends Component {
             {
                 id: 5,
                 name: 'Name of user',
-                avatar: avatar,
                 isFollowed: false,
                 age: 27,
                 email: 'name.user@gmail.com',
@@ -71,7 +66,6 @@ class UsersList extends Component {
         selectedUser: {
             id: undefined,
             name: undefined,
-            avatar: undefined,
             isFollowed: undefined,
             age: undefined,
             email: undefined,
@@ -90,7 +84,6 @@ class UsersList extends Component {
             selectedUser: {
                 id: thisUser[0].id,
                 name: thisUser[0].name,
-                avatar: thisUser[0].avatar,
                 isFollowed: thisUser[0].isFollowed,
                 age: thisUser[0].age,
                 email: thisUser[0].email,
@@ -142,7 +135,7 @@ class UsersList extends Component {
                                         className="d-flex align-items-center user"
                                     >
                                         <img
-                                            src={item.avatar}
+                                            src={item.avatarImg}
                                             alt="Avatar"
                                         />
                                         {item.name}
